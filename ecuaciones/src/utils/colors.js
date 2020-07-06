@@ -3,5 +3,5 @@
 export default {
   //Se pone en mayúsculas ya que son constantes
   PRIMARY_COLOR: '#d81b60',
-  PRIMARY_COLOR_DARK: '#a00037',
+  PRIMARY_COLOR_DARK: '#b0003a',
 };

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 import {
   StyleSheet,
   View,
@@ -21,6 +22,7 @@ export default function App() {
   const [C, setC] = useState(null);
   const [total, setTotal] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+
   //funcion para calcular automáticamente
   useEffect(() => {
     if (A && B && C) {
@@ -58,15 +60,11 @@ export default function App() {
     //Podemos poner un View o una etiqueta vacia
     <>
       <StatusBar barStyle="light-content" />
-      <SafeAreaView style={styles.safeArea}>
+      <LinearGradient colors={['#fff', '#d81b60']} style={styles.safeArea}>
         <View style={styles.background} />
         <Text style={styles.titleApp}>Ecuaciones de 2do Grado</Text>
-        <Form
-          setA={setA}
-          setB={setB}
-          setC={setC}
-        />
-      </SafeAreaView>
+        <Form setA={setA} setB={setB} setC={setC} />
+      </LinearGradient>
       <View style={styles.content}>
         <ResultadoCalcular
           A={A}
@@ -126,5 +124,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 20,
+  },
+
+  gradient: {
+    width: 200,
+    height: 200,
   },
 });
