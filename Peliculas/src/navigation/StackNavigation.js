@@ -6,7 +6,7 @@ import Movie from '../screens/Movie';
 import News from '../screens/News';
 import Popular from '../screens/Popular';
 import Search from '../screens/Search';
-import Navigation from './Navigation';
+//import Navigation from './Navigation';
 const Stack = createStackNavigator();
 
 export default function StackNavigation(props) {
