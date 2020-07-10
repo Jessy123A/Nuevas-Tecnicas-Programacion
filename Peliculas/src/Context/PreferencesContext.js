@@ -1,7 +1,7 @@
-import React from 'react'
+import {createContext} from 'react';
 
-const PreferencesContext = ({
-    theme:'',
-    toggleTheme:() => {},
+const PreferencesContext = createContext({
+  theme: '',
+  toggleTheme: () => {},
 });
-export default function PreferencesContext() 
+export default PreferencesContext;

@@ -19,18 +19,18 @@ export default function StackNavigation(props) {
       <Stack.Screen
         name="Home"
         component={Home}
-        option={{title: 'TheMovieApp', headerLeft: () => buttonLeft()}}
+        options={{title: 'TheMovieApp', headerLeft: () => buttonLeft()}}
       />
 
       <Stack.Screen
         name="Movie"
         component={Movie}
-        option={{title: '', headerLeft: () => buttonLeft()}}
+        options={{title: '', headerLeft: () => buttonLeft()}}
       />
       <Stack.Screen
         name="News"
         component={News}
-        option={{title: 'News', headerLeft: () => buttonLeft()}}
+        options={{title: 'News', headerLeft: () => buttonLeft()}}
       />
 
       <Stack.Screen

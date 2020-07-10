@@ -1,22 +1,26 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
-import {Drawer} from 'react-native-paper';
+import {Drawer, Switch} from 'react-native-paper';
 import Navigation from './Navigation';
+import usePreference from '../hooks/usePreferences';
 
 export default function DrawerContent(props) {
   const {navigation} = props;
-  const {active, setActive} = useState('home');
+  const [active, setActive] = useState('home');
   //console.log(props);
+
+  const {theme, toggleTheme} = usePreference();
   const onChangeScreen = screen => {
-    //setActive(screen);
+    setActive(screen);
     navigation.navigate(screen);
   };
+
   return (
     <DrawerContentScrollView>
       <Drawer.Section>
         <Drawer.Item
-          label="inicio"
+          label="Inicio"
           active={active === 'home'}
           onPress={() => onChangeScreen('home')}
         />
@@ -31,8 +35,23 @@ export default function DrawerContent(props) {
           onPress={() => onChangeScreen('news')}
         />
       </Drawer.Section>
+
+      <Drawer.Section title="Opciones">
+        <View style={StyleSheet.preferences}>
+          <Text>Tema Oscuro</Text>
+          <Switch value={true} />
+        </View>
+      </Drawer.Section>
     </DrawerContentScrollView>
   );
 }
 
-const style = StyleSheet.create({});
+const styles = StyleSheet.create({
+  preferences: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+});
