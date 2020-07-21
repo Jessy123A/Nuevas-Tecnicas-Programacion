@@ -3,6 +3,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import DrawerContent from './DrawerContent';
 import StackNavigation from './StackNavigation';
 import News from '../screens/News';
+import Search from '../screens/Search';
 
 const Drawer = createDrawerNavigator();
 
@@ -13,7 +14,6 @@ export default function Navigation() {
       initialRouteName="app"
       drawerContent={props => <DrawerContent {...props} />}>
       <Drawer.Screen name="app" component={StackNavigation} />
-      <Drawer.Screen name="news" component={News} />
     </Drawer.Navigator>
   );
 }
