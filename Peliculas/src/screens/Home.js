@@ -3,7 +3,12 @@ import {View, StyleSheet, Text, ScrollView} from 'react-native';
 import {Title} from 'react-native-paper';
 import {map} from 'lodash';
 import CarouselVertical from '../components/CarouselVertical';
-import {getNewsMoviesApi, getGenreMoviApi, getAllGenereApi} from '../api/movies';
+import CarouselMulti from '../components/CarouselMulti';
+import {
+  getNewsMoviesApi,
+  getAllGenereApi,
+  getGenreMoviesApi,
+} from '../api/movies';
 
 export default function Home(props) {
   //Hacemos un destruction y la pasamos navigation
@@ -13,7 +18,9 @@ export default function Home(props) {
   const [newMovies, setNewMovies] = useState(null);
   const [genreList, setGenreList] = useState([]);
   const [genreSelected, setGenreSelected] = useState(28);
-
+  //Creamos un estado para guardar las peliculas quw conseguimos según los géneros
+  const [genreMovies, setGenreMovies] = useState(null);
+  console.log(genreMovies);
   console.log(newMovies);
   //getNewsMoviesApi();
   useEffect(() => {
@@ -28,6 +35,14 @@ export default function Home(props) {
       //console.log(response);
     });
   }, []);
+
+  //Creamos un useEffect para obtener todas las películas dependiendo el género
+  useEffect(() => {
+    getGenreMoviesApi(genreSelected).then(response => {
+      setGenreMovies(response.results);
+      //console.log(response);
+    });
+  }, [genreSelected]);
 
   const onChangeGenre = newGenreId => {
     setGenreSelected(newGenreId);
@@ -58,6 +73,10 @@ export default function Home(props) {
             </Text>
           ))}
         </ScrollView>
+
+        {genreMovies && (
+          <CarouselMulti data={genreMovies} navigation={navigation} />
+        )}
       </View>
     </ScrollView>
   );
