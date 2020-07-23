@@ -22,6 +22,9 @@ export default function CarouselMulti(props) {
       renderItem={(item) => <RenderItem data={item} navigation={navigation} />}
       sliderWidth={width}
       itemWidth={ITEM_WIDTH}
+      firstItem={1}
+      inactiveSlideScale={1}
+      inactiveSlideOpacity={1}
     />
   );
 }
@@ -35,6 +38,7 @@ function RenderItem(props) {
   //creamos una constante para nuestro onPress
   const onNavigation = () => {
     console.log('Navegando...');
+    navigation.navigate('movie', {id});
   };
   return (
     <TouchableWithoutFeedback onPress={onNavigation}>

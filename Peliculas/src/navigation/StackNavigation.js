@@ -54,7 +54,7 @@ export default function StackNavigation(props) {
         component={Movie}
         options={{
           title: '',
-          headerLeft: () => buttonLeft(),
+          headerLeft: () => buttonLeft('movie'),
           headerRight: () => buttonRight(),
         }}
       />
