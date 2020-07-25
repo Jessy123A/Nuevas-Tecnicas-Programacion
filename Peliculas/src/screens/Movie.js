@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import ModalVideo from '../components/ModalVideo';
 import {getMovieByIdApi} from '../api/movies';
 import {BASE_PATH_IMG} from '../utils/constants';
 import {ScrollView} from 'react-native-gesture-handler';
-import { IconButton } from 'react-native-paper';
+import {Text, Title, IconButton} from 'react-native-paper';
+import {map} from 'lodash';
 
 export default function Movie(props) {
   //console.log(props);
@@ -25,8 +26,9 @@ export default function Movie(props) {
       <ScrollView>
         <MovieImage posterPath={movie.poster_path} />
         <MovieTrailer setShowVideo={setShowVideo} />
+        <MovieTitle movie={movie} />
       </ScrollView>
-      <ModalVideo show={showVideo} setShow={setShowVideo} />
+      <ModalVideo show={showVideo} setShow={setShowVideo} idMovie={id} />
     </>
   );
 }
@@ -60,6 +62,23 @@ function MovieTrailer(props) {
   );
 }
 
+//Creamos una función para obtener el título y el género de la película
+function MovieTitle(props){
+  const {movie} = props;
+  return (
+    <View style={styles.viewInfo}>
+      <Title>{movie.title}</Title>
+      <View style={styles.viewGenres}>
+        {map(movie.genres, (genre) => (
+          <Text key={genre.id} style={styles.genre}>
+            {genre.name}
+          </Text>
+        ))}
+      </View>
+    </View>
+  )
+}
+
 const styles = StyleSheet.create({
   viewPoster: {
     shadowColor: '#000',
@@ -90,5 +109,15 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 100,
+  },
+  viewInfo: {
+    marginHorizontal: 30,
+  },
+  viewGenres: {
+    flexDirection: 'row',
+  },
+  genre: {
+    marginRight: 20,
+    color: '#8697a5',
   },
 });
